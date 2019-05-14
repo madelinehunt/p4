@@ -11,9 +11,17 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::view('/','welcome');
+Route::view('/about', 'about');
+Route::any('/practice/{n?}', 'PracticeController@index');
+
+/*
+ * Studies
+ */
+Route::get('/studies/show/{id}', 'StudyController@show');
+Route::get('/studies/create', 'StudyController@create');
+
+Route::get('/participants/create', 'ParticipantController@create');
 
 Route::get('/db-debug', function () {
 

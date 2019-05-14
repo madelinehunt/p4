@@ -1,0 +1,65 @@
+/* nav CSS */
+.nav-header{
+  margin-top: 1%;
+  max-width: 50%;
+  /* overflow: hidden; */
+  background-color: #0033cc;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+  border-radius: 3%;
+}
+
+.nav-header a {
+  /* float: left; */
+  font-size: 16px;
+  color: white;
+  background-color: #0033cc;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  border: none;
+}
+
+.dropbtn {
+  background-color: #0033cc;
+  color: white;
+  padding: 16px;
+  font-size: 16px;
+  text-align: center;
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+  /* overflow: hidden; */
+}
+
+/* Dropdown Content (Hidden by Default) */
+.dropdown-content {
+  display: none;
+  position: absolute;
+  left: 0;
+  background-color: #f1f1f1;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+/* Links inside the dropdown */
+.dropdown-content a {
+  color: white;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+.nav-header a:hover {background-color: #0040ff;}
+.dropdown:hover .dropbtn {background-color: #0040ff;}
+.dropdown-content a:hover {background-color: #0040ff;}
+
+/* Show the dropdown menu on hover */
+.dropdown:hover .dropdown-content {display: block;}

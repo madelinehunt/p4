@@ -1,0 +1,56 @@
+html,
+body {
+  margin: 0;
+  padding: 0;
+  height: 95%; /* needed for container min-height */
+  width: 100%;
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+  font-family: Helvetica, Arial, sans-serif;
+}
+
+#roundrect-container {
+  background-color: #d3d3d396;
+  min-height: 100%;
+  max-width: 75%;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 0%;
+  border-radius: 1%;
+}
+
+h1 {
+  text-align: center;
+  font-family: serif;
+  font-size: 32px;
+  padding-top: 2%;
+}
+
+#scales_title {
+  margin-bottom: 70px;
+}
+
+#options * {
+  margin-top: 2px;
+}
+
+#submit-button {
+  margin-top: 32px;
+  font-weight: bold;
+}
+
+.errors{
+  margin-top: 2%;
+  color: red;
+}
+
+#errors-list{
+  display: inline-block;
+}
+
+.reqd {
+  color:#800000;
+  vertical-align: super;
+  font-size: 12px;
+}
