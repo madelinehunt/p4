@@ -58,7 +58,7 @@ class ParticipantStudyTableSeeder extends Seeder
 
             $study = Study::where('name', 'LIKE', $study_name)->first();
 
-            $participant->study()->save($study);
+            $participant->studies()->save($study);
         };
 
     }
