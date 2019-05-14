@@ -16,10 +16,25 @@ class StudyController extends Controller
 
         // first show study info as context
         // then show all the participants in the study
+
+        return view('report.studyreport')->with([
+            'study' => $study
+        ]);
     }
 
-    public function create()
+    public function list($type)
     {
-        
+        $study = Study::where('type', '=', $type)->get();
+
+        if ($type == 'mturk') {
+            $display_type = 'MTurk';
+        } else {
+            $display_type = $type;
+        }
+
+        return view('report.list')->with([
+            'study_list' => $study,
+            'study_type' => $display_type,
+        ]);
     }
 }

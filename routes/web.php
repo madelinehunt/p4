@@ -10,15 +10,15 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
+Route::any('/practice/{n?}', 'PracticeController@index');
 
 Route::view('/','welcome');
-Route::view('/about', 'about');
-Route::any('/practice/{n?}', 'PracticeController@index');
+Route::get('/report/{type}', 'StudyController@list');
+Route::get('/studies/show/{id}', 'StudyController@show');
 
 /*
  * Studies
  */
-Route::get('/studies/show/{id}', 'StudyController@show');
 Route::get('/studies/create', 'StudyController@create');
 
 Route::get('/participants/create', 'ParticipantController@create');

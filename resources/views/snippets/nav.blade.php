@@ -6,8 +6,8 @@
                 <i class="fa fa-caret-down"></i>
             </button>
             <div class="dropdown-content" style="left:0;">
-                <a href="#">Local (fMRI) Study</a>
-                <a href="#">MTurk Study</a>
+                <a href="/report/fMRI">Local (fMRI) Study</a>
+                <a href="/report/mturk">MTurk Study</a>
             </div>
         </div>
 
@@ -32,6 +32,6 @@
             </div>
         </div>
 
-        <a href="#about">About</a>
+        {{-- <a href="#about">About</a> --}}
 
 </div>
