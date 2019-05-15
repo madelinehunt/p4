@@ -33,13 +33,15 @@ Route::get('/edit/study/{id}', 'StudyController@edit');
 Route::post('/study/updateInDB/{id}', 'StudyController@updateInDB');
 
 // editing participants
-Route::get('/find/participant/search', 'ParticipantController@search');
-Route::get('/find/participant/{id?}', 'ParticipantController@findToEdit');
+Route::get('/find/participant/{req_type?}', 'ParticipantController@findToEdit');
+Route::get('/edit/participant/{id?}', 'ParticipantController@getInfo');
+Route::get('/participant/search/{req_type}', 'ParticipantController@search');
+// Route::get('/find/participant/{id?}', 'ParticipantController@findToEdit');
 Route::post('/participant/updateInDB/{id}', 'ParticipantController@updateInDB');
 
 // editing connections between participants and studies
-Route::get('/edit/connection', 'ConnectionController@edit');
-Route::post('/connection/saveConnection', 'ConnectionController@saveConnection');
+Route::get('/connect/participant/{id?}', 'ParticipantController@connectSingle');
+Route::post('/connection/saveConnection/{id?}', 'ParticipantController@saveConnection');
 
 Route::get('/db-debug', function () {
 

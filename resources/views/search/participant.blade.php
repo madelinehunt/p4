@@ -12,10 +12,9 @@
         </div>
     @endif
 
-
     <h3>Find a participant to edit.</h3>
 
-        <form method='GET' action='/find/participant/search' class="creation-form">
+        <form method='GET' action='/participant/search/{{ $req_type }}' class="creation-form">
             {{ csrf_field() }}
 
             <label for='keyword'>Substring search of ID field @include('snippets.req')</label>

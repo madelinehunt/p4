@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Participant;
 use App\Study;
+use Carbon\Carbon;
 
 class ParticipantController extends Controller
 {
@@ -88,31 +89,36 @@ class ParticipantController extends Controller
         ]);
     }
 
-    public function search(Request $request)
+    public function search(Request $request, $req_type)
     {
         $results = Participant::with('studies')->where('id_code', 'like', '%'.$request->keyword.'%')->get();
 
         return view('search.results')->with([
             'req' => $request,
             'results' => $results,
+            'req_type' => $req_type,
         ]);
     }
 
-    public function findToEdit($id = null)
+    public function findToEdit($req_type)
     {
-        if ($id == null) {
-            return view('search.participant');
-        } else {
-            $participant = Participant::find($id);
+        return view('search.participant')->with([
+            'req_type' => $req_type,
+        ]);
+    }
 
-            return view('edit.participant')->with([
-                'existing_participant' => $participant,
-                'participant_id' => $id,
-                'gender_choices' => $this->gender_choices,
-                'race_choices' => $this->race_choices,
-                'ethn_choices' => $this->ethn_choices,
-            ]);
-        };
+
+    public function getInfo($id = null)
+    {
+        $participant = Participant::find($id);
+
+        return view('edit.participant')->with([
+            'existing_participant' => $participant,
+            'participant_id' => $id,
+            'gender_choices' => $this->gender_choices,
+            'race_choices' => $this->race_choices,
+            'ethn_choices' => $this->ethn_choices,
+        ]);
     }
 
     public function updateInDB(Request $request, $id)
@@ -137,10 +143,52 @@ class ParticipantController extends Controller
 
         $udpated_p->save();
 
-        return redirect('/find/participant')->with([
+        return redirect('/find/participant/edit')->with([
             'edited_name' => $udpated_p->id_code,
         ]);
+    }
 
+    public function connectSingle($id)
+    {
+        $participant = Participant::find($id);
+
+        $studies = Study::all();
+
+        return view('edit.connection')->with([
+            'participant' => $participant,
+            'studies' => $studies,
+            'p_id' => $id,
+            'pol_options' => [
+                'Democrat',
+                'Republican',
+                'Third-Party',
+                'Independent',
+                'Decline'
+            ]
+        ]);
+    }
+
+    public function saveConnection(Request $request, $id)
+    {
+        $participant = Participant::find($id);
+        $study = Study::find($request->study_add);
+        if (!isset($request->political_affiliation)) {
+            $request->political_affiliation = null;
+        };
+        if (!isset($request->date_run)) {
+            $request->date_run = null;
+        } else {
+            $request->date_run = Carbon::parse($request->date_run);
+        };
+
+        $participant->studies()->save($study, [
+            'political_affiliation' => $request->political_affiliation,
+            'date_run' => $request->date_run,
+        ]);
+
+        return redirect('/find/participant/connect')->with([
+            'edited_name' => $participant->id_code,
+        ]);
     }
 
 }

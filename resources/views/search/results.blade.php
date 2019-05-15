@@ -23,7 +23,7 @@
         @foreach ($results as $ix => $result)
             <tr>
                 <td>
-                    <a href="/find/participant/{{ $result->id }}">
+                    <a href="/{{ $req_type }}/participant/{{ $result->id }}">
                         {{ $result->id_code }}
                     </a>
                 </td> {{-- add link here --}}
@@ -40,6 +40,5 @@
             </tr>
         @endforeach
     </table>
-
 
 @endsection

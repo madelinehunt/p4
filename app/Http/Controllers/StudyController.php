@@ -7,7 +7,6 @@ use App;
 use App\Participant;
 use App\Study;
 
-
 class StudyController extends Controller
 {
     private $validation_rules = [

@@ -27,8 +27,8 @@
             </button>
             <div class="dropdown-menu">
                 <a href="/edit/study">Edit Study</a>
-                <a href="/find/participant">Edit Participant</a>
-                <a href="#">Add Participant to Study</a>
+                <a href="/find/participant/edit">Edit Participant</a>
+                <a href="/find/participant/connect">Add Participant to Study</a>
             </div>
         </div>
 

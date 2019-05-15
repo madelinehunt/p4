@@ -33,8 +33,8 @@ class CreateParticipantStudyTable extends Migration
                 'Third-Party',
                 'Independent',
                 'Decline'
-            ));
-            $table->date('date_run');
+            ))->nullable();
+            $table->date('date_run')->nullable();
         });
     }
 

@@ -21,3 +21,12 @@ th {
   padding-bottom: 10px;
   margin-bottom: 10px;
 }
+
+.table-select-input {
+  margin-left: 0;
+  min-width: 10em;
+}
+
+.table-date-input {
+  font-size: 14px;
+}
