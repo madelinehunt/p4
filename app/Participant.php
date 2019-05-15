@@ -8,6 +8,6 @@ class Participant extends Model
 {
     public function studies()
     {
-        return $this->belongsToMany('App\Study')->withTimestamps();
+        return $this->belongsToMany('App\Study')->withTimestamps()->withPivot('political_affiliation', 'date_run');
     }
 }

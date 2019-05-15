@@ -12,16 +12,34 @@
 */
 Route::any('/practice/{n?}', 'PracticeController@index');
 
+// home page
 Route::view('/','welcome');
+
+// generating study reports
 Route::get('/report/{type}', 'StudyController@list');
 Route::get('/studies/show/{id}', 'StudyController@show');
 
-/*
- * Studies
- */
-Route::get('/studies/create', 'StudyController@create');
+// creating studies
+Route::get('/create/study', 'StudyController@create');
+Route::post('/study/addToDB', 'StudyController@addToDB');
 
-Route::get('/participants/create', 'ParticipantController@create');
+// creating participants
+Route::get('/create/participant', 'ParticipantController@create');
+Route::post('/participant/addToDB', 'ParticipantController@addToDB');
+
+// editing studies
+Route::get('/edit/study', 'StudyController@findToEdit');
+Route::get('/edit/study/{id}', 'StudyController@edit');
+Route::post('/study/updateInDB/{id}', 'StudyController@updateInDB');
+
+// editing participants
+Route::get('/find/participant/search', 'ParticipantController@search');
+Route::get('/find/participant/{id?}', 'ParticipantController@findToEdit');
+Route::post('/participant/updateInDB/{id}', 'ParticipantController@updateInDB');
+
+// editing connections between participants and studies
+Route::get('/edit/connection', 'ConnectionController@edit');
+Route::post('/connection/saveConnection', 'ConnectionController@saveConnection');
 
 Route::get('/db-debug', function () {
 

@@ -95,7 +95,7 @@ class ParticipantsTableSeeder extends Seeder
             $participants->created_at = Carbon\Carbon::now()->subDays($count+1)->toDateTimeString();
             $participants->updated_at = Carbon\Carbon::now()->subDays($count)->toDateTimeString();
             $participants->id_code = $initialParticipant[0];
-            $participants->participant_type = $initialParticipant[1];
+            $participants->type = $initialParticipant[1];
             $participants->gender = $initialParticipant[2];
             $participants->race = $initialParticipant[3];
             $participants->ethnicity = $initialParticipant[4];

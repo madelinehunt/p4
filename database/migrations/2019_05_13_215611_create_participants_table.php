@@ -18,7 +18,7 @@ class CreateParticipantsTable extends Migration
             $table->timestamps();
 
             $table->string('id_code');
-            $table->enum('participant_type', array('mturk', 'fMRI'));
+            $table->enum('type', array('mturk', 'fMRI'));
             $table->enum('gender', array(
                 'Male',
                 'Female',

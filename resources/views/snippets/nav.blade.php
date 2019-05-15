@@ -1,33 +1,33 @@
 <div class="nav-header">
-        <a href="#home">Home</a>
+        <a href="/">Home</a>
 
         <div class="dropdown">
-            <button class="dropbtn">Get Report
+            <button class="dropbutton">Get Report
                 <i class="fa fa-caret-down"></i>
             </button>
-            <div class="dropdown-content" style="left:0;">
+            <div class="dropdown-menu">
                 <a href="/report/fMRI">Local (fMRI) Study</a>
                 <a href="/report/mturk">MTurk Study</a>
             </div>
         </div>
 
         <div class="dropdown">
-            <button class="dropbtn">Create
+            <button class="dropbutton">Create
                 <i class="fa fa-caret-down"></i>
             </button>
-            <div class="dropdown-content" style="float:right;">
-                <a href="#">Study</a>
-                <a href="#">Participant</a>
+            <div class="dropdown-menu">
+                <a href="/create/study">Study</a>
+                <a href="/create/participant">Participant</a>
             </div>
         </div>
 
         <div class="dropdown">
-            <button class="dropbtn">Edit
+            <button class="dropbutton">Edit
                 <i class="fa fa-caret-down"></i>
             </button>
-            <div class="dropdown-content">
-                <a href="#">Edit Study</a>
-                <a href="#">Edit Participant</a>
+            <div class="dropdown-menu">
+                <a href="/edit/study">Edit Study</a>
+                <a href="/find/participant">Edit Participant</a>
                 <a href="#">Add Participant to Study</a>
             </div>
         </div>

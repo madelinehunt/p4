@@ -26,6 +26,15 @@ class CreateParticipantStudyTable extends Migration
             # Make foreign keys
             $table->foreign('study_id')->references('id')->on('studies');
             $table->foreign('participant_id')->references('id')->on('participants');
+
+            $table->enum('political_affiliation', array(
+                'Democrat',
+                'Republican',
+                'Third-Party',
+                'Independent',
+                'Decline'
+            ));
+            $table->date('date_run');
         });
     }
 

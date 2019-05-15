@@ -1,0 +1,44 @@
+#req-explanation {
+  margin-top: 1%;
+  margin-right: 25%;
+  float:right;
+  /* margin-bottom: 5%; */
+}
+
+.submit-button {
+  margin-top: 3%;
+  font-weight: bold;
+  font-size: 16px;
+}
+
+.creation-form {
+  margin-top: 3%;
+}
+
+label {
+    margin-bottom: 3px;
+    margin-top: 2%;
+    display: block;
+    width: 50%;
+    text-align: left;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+input[type=text] {
+    display: block;
+    width: 50%;
+    padding: 3px;
+    margin-left: auto;
+    margin-right: auto;
+    font-size: 16px;
+}
+
+select {
+  display: block;
+  width: 51%;
+  padding: 3px;
+  margin-left: auto;
+  margin-right: auto;
+  font-size: 16px;
+}
