@@ -11,7 +11,7 @@
     <table>
         <tr>
             <th>ID</th>
-            <th>Type</th>
+            {{-- <th>Type</th> --}}
             <th>Age</th>
             <th>Gender</th>
             <th>Race</th>
@@ -22,7 +22,7 @@
         @foreach ($study->participants as $ix => $p)
             <tr>
                 <td>{{ $p->id_code }}</td>
-                <td>{{ $p->type }}</td>
+                {{-- <td>{{ $p->type }}</td> --}}
                 <td>{{ $p->age }}</td>
                 <td>{{ $p->gender }}</td>
                 <td>{{ $p->race }}</td>

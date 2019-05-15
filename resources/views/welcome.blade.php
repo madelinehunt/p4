@@ -1,10 +1,14 @@
 @extends('layouts.master')
 
+@section('title')
+    Welcome to Neuroscience Lab
+@endsection
+
 @section('splash')
     <div class="welcome-splash">
         <h1>Welcome to Neuroscience Lab</h1>
         <p>
-            <img src="/img/brain.png" style="max-width:40%"/>
+            <img src="/img/brain.png" style="max-width:40%" alt="an image of a brain"/>
         </p>
     </div>
 @endsection
@@ -17,6 +21,7 @@
                 <li>Create studies and participants</li>
                 <li>Update studies and participants</li>
                 <li>Add participants to studies</li>
+            </ul>
         </p>
     </div>
 @endsection
