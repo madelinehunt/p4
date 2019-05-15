@@ -15,13 +15,12 @@
 
 @section('content')
     <div class="welcome-content">
-        <p>Here, you can interface with the lab database. You can:
-            <ul>
-                <li>Run reports on studies—local (fMRI) or MTurk</li>
-                <li>Create studies and participants</li>
-                <li>Update studies and participants</li>
-                <li>Add participants to studies</li>
-            </ul>
-        </p>
+        <p>Here, you can interface with the lab database. You can:</p>
+        <ul>
+            <li>Run reports on studies—local (fMRI) or MTurk</li>
+            <li>Create studies and participants</li>
+            <li>Update studies and participants</li>
+            <li>Add participants to studies</li>
+        </ul>
     </div>
 @endsection
