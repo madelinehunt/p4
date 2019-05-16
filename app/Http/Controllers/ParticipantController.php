@@ -119,21 +119,10 @@ class ParticipantController extends Controller
         return redirect('/find/study/list/'.$query_string);
     }
 
-    public function search(Request $request, $req_type)
-    {
-        $results = Participant::with('studies')->where('id_code', 'like', '%'.$request->keyword.'%')->get();
-
-        return view('search.results')->with([
-            'req' => $request,
-            'results' => $results,
-            'req_type' => $req_type,
-        ]);
-    }
-
     public function editForm($id)
     {
         $edit_type = explode('/', url()->current());
-        $edit_type = $edit_type[sizeof($edit_type)-2]; // derives eiher connection or participant
+        $edit_type = $edit_type[sizeof($edit_type)-2]; // derives either connection or participant
 
         if ($edit_type == 'participant') {
             $data = Participant::find($id);
@@ -155,7 +144,6 @@ class ParticipantController extends Controller
              $data = Participant::find($id);
              $studies = Study::all();
 
-             // change to connection form
              return view('create_or_edit')->with([
                   'page_opts' => [
                       'form_type' => 'connection',
@@ -178,37 +166,10 @@ class ParticipantController extends Controller
          }
     }
 
-    public function editConnectionForm($id)
-    {
-        $data = Participant::find($id);
-        $studies = Study::all();
-
-        // change to connection form
-        return view('create_or_edit')->with([
-             'page_opts' => [
-                 'form_type' => 'connection',
-                 'action_type' => 'edit',
-                 'header_text' => 'Add a connection to '.$data->id_code,
-                  'button_label' => 'Submit',
-                  'title_text' => 'Add a connection to '.$data->id_code,
-             ],
-             'studies' => $studies,
-             'participant' => $data,
-             'p_id' => $id,
-             'pol_options' => [
-                 'Democrat',
-                 'Republican',
-                 'Third-Party',
-                 'Independent',
-                 'Decline'
-             ],
-         ]);
-    }
-
     public function updateInDB(Request $request, $id)
     {
         $edit_type = explode('/', url()->current());
-        $edit_type = $edit_type[sizeof($edit_type)-2]; // derives eiher connection or participant
+        $edit_type = $edit_type[sizeof($edit_type)-2]; // derives either connection or participant
 
         if ($edit_type == 'participant') {
             $this->validate($request, $this->validation_rules, $this->validation_messages);

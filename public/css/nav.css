@@ -2,16 +2,13 @@
 .nav-header{
   margin-top: 1%;
   max-width: 50%;
-  /* overflow: hidden; */
   background-color: #0033cc;
   margin-left: auto;
   margin-right: auto;
   text-align: center;
-  /* border-radius: 3%; */
 }
 
 .nav-header a {
-  /* float: left; */
   font-size: 16px;
   color: white;
   background-color: #0033cc;
@@ -35,7 +32,6 @@
 .dropdown {
   position: relative;
   display: inline-block;
-  /* overflow: hidden; */
 }
 
 .dropdown-menu {
