@@ -1,71 +1,48 @@
-<p align="center"><img src="https://laravel.com/assets/img/components/logo-laravel.svg"></p>
+# Project 4
 
-<p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/d/total.svg" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/v/stable.svg" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/license.svg" alt="License"></a>
-</p>
++ By: Nathaniel Hunt
++ Production URL: p4.nhunt.me
 
-## About Laravel
+## Feature summary
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
++ The application serves primarily as an interface to an internal database for a neuroscience lab. In other words, this is an attempt to rebuild an internal lab tool using Laravel (and to add additional features while doing it).
++ Users can get reports of each lab study (divided between local (fMRI) and MTurk studies). These reports reference the relationship between the database tables to show all participants associated with a given study.
++ Users can create studies.
++ Users can create participants.
++ Users can edit studies.
++ Users can search for participants using a searchbox that's a front-end to a SQL query. 
++ Once participants are found, users can either edit the particpant itself, or edit the relationship between a participant and a study. 
++ The pivot table that tracks the (many to many) relationship between studies and participants also stores additional data, allowing to store study/participant run dates and for participants to have different political affiliations in each study (which happens surprisingly often in actual research).
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+  
+## Database summary
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
++ My application has 3 tables in total (`studies`, `participants`, and the pivot table `particpant_study`).
++ There's a many-to-many relationship between `studies ` and `participants `.
 
-## Learning Laravel
+## Outside resources
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
++ royalty-free image of a brain: https://www.flickr.com/photos/147506298@N05/40447707593/in/photolist-24Ce5hR-7UuP8y-7UuNns-7hxkk-o3EVhm-7UofZZ-8htGTz-nZ6RGY-o3KF16-bgGqFr-Jvcm92-fnWu9d-4B1kLB-aqGU1F-Sn8d2y-RXUc5x-nLhj1p-qxUD3b-RXUbMD-ko8WuX-7UrtDd-21F4fvS-coWuU7-jsjjkY-9xni5o-7UrtW3-cFDuru-6YWvxA-9hiPC-8r4P48-8BU54J-doDHZX-264npDE-8g1MY-4SpukF-EJMigp-Xfugou-DzZ7AL-gX7kp3-fvJu19-c5vkMm-87zpKK-aBzu8F-52QBUS-Ms4Zp-EJMipk-6c4Na4-9S32U-9YTWxn-4ApNSB
++ https://www.w3schools.com/howto/howto_css_dropdown.asp
++ https://laracasts.com/discuss/channels/laravel/save-additional-pivot-table-attributes
++ https://laraveldaily.com/all-about-redirects-in-laravel-5/
++ https://techanical-atom.com/working-with-date-and-time-in-laravel-carbon/
++ https://stackoverflow.com/questions/1161708/php-detect-whitespace-between-strings
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 1100 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost you and your team's skills by digging into our comprehensive video library.
+## Code style divergences
++ I believe I followed good coding style for most, if not all, of my project. 
 
-## Laravel Sponsors
+## Notes for instructor
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
-
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[British Software Development](https://www.britishsoftware.co)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- [UserInsights](https://userinsights.com)
-- [Fragrantica](https://www.fragrantica.com)
-- [SOFTonSOFA](https://softonsofa.com/)
-- [User10](https://user10.com)
-- [Soumettre.fr](https://soumettre.fr/)
-- [CodeBrisk](https://codebrisk.com)
-- [1Forge](https://1forge.com)
-- [TECPRESSO](https://tecpresso.co.jp/)
-- [Runtime Converter](http://runtimeconverter.com/)
-- [WebL'Agence](https://weblagence.com/)
-- [Invoice Ninja](https://www.invoiceninja.com)
-- [iMi digital](https://www.imi-digital.de/)
-- [Earthlink](https://www.earthlink.ro/)
-- [Steadfast Collective](https://steadfastcollective.com/)
-- [We Are The Robots Inc.](https://watr.mx/)
-- [Understand.io](https://www.understand.io/)
-- [Abdel Elrafa](https://abdelelrafa.com)
-
-## Contributing
-
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-source software licensed under the [MIT license](https://opensource.org/licenses/MIT).
++ In case it isn't clear from the above notes, here are the specific ways that this project fulfills the project key requirements:
++ 3 unique CRUD operations *(in general, our lab saves all data, so I didn't prioritize the deletion of data)*: 
+	+ Create
+	+ Read
+	+ Update
++ 1 relationship between 2 tables:
+	+ there is a pivot table defining a many-to-many relationship between the `studies` and `participants` tables.
++  I envision the following additional features that set this project apart from `foobooks`:
+	+ User ability to manage 2 database tables directly (vs. the single one in `foobooks`).
+	+ The pivot table that defines the relationship between the two database tables contains additional data, making it a much more fully-featured database table in its own right (and allowing for additional application features).
+	+ Users can directly add relationships between the tables. 
++ Thanks for all your work on this class! I've learned a lot.
