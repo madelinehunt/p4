@@ -10,6 +10,72 @@ class PracticeController extends Controller
     /**
      * Week 11 - DELETE example
      */
+
+     private $gender_choices = [
+        'Male',
+        'Female',
+        'Non-binary',
+        'Decline'
+    ];
+    private $race_choices = [
+        'American Indian or Alaska Native',
+        'Asian',
+        'Black or African-American',
+        'Native Hawaiian or Other Pacific Islander',
+        'White',
+        'Other',
+        'Multi-ethnic',
+        'Decline',
+    ];
+    private $ethn_choices = [
+        'Hispanic',
+        'Not Hispanic',
+        'Decline',
+    ];
+
+    private $validation_rules = [
+        'id_code' => [
+            'required',
+            'alpha_num',
+            'max:16'
+        ],
+        'age' => [
+            'required',
+            'max:120',
+            'numeric',
+            'min:18'
+        ]
+    ];
+
+     public function practice3()
+     {
+         return view('create_or_edit')->with([
+             'page_opts' => [
+                 'form_type' => 'participant',
+                 'action_type' => 'add',
+                 'header_text' => 'Add a participant to the database',
+                 'button_label' => 'Add participant',
+                 'title_text' => 'Add a participant to the database',
+             ],
+            'gender_choices' => $this->gender_choices,
+            'race_choices' => $this->race_choices,
+            'ethn_choices' => $this->ethn_choices,
+         ]);
+     }
+
+    public function practice2()
+    {
+        return view('create_or_edit')->with([
+            'page_opts' => [
+                'form_type' => 'study',
+                'action_type' => 'add',
+                'header_text' => 'Add a study to the database',
+                'button_label' => 'Add study',
+                'title_text' => 'Add a study to the database',
+            ],
+        ]);
+    }
+
     public function practice1()
     {
         # First get a book to delete

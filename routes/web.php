@@ -10,38 +10,33 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
+
+// practice routing
 Route::any('/practice/{n?}', 'PracticeController@index');
 
 // home page
 Route::view('/','welcome');
 
-// generating study reports
-Route::get('/report/{type}', 'StudyController@list');
-Route::get('/studies/show/{id}', 'StudyController@show');
+// creation
+Route::get('/add/study/render', 'StudyController@addForm');
+Route::get('/add/participant/render', 'ParticipantController@addForm');
+Route::post('/add/study/create', 'StudyController@addToDB');
+Route::post('/add/participant/create', 'ParticipantController@addToDB');
 
-// creating studies
-Route::get('/create/study', 'StudyController@create');
-Route::post('/study/addToDB', 'StudyController@addToDB');
+// finding or listing db entities -- for editing or reports
+Route::get('/find/study/list/{filter?}', 'StudyController@list');
+Route::get('/find/participant/{edit_type}', 'ParticipantController@searchPage');
+Route::get('find/searchEngine/{edit_type}', 'ParticipantController@searchEngine');
 
-// creating participants
-Route::get('/create/participant', 'ParticipantController@create');
-Route::post('/participant/addToDB', 'ParticipantController@addToDB');
+// render the editing forms
+Route::get('/edit/study/{id}', 'StudyController@editForm');
+Route::get('/edit/participant/{id}', 'ParticipantController@editForm');
+Route::get('/edit/connection/{id}', 'ParticipantController@editForm');
 
-// editing studies
-Route::get('/edit/study', 'StudyController@findToEdit');
-Route::get('/edit/study/{id}', 'StudyController@edit');
-Route::post('/study/updateInDB/{id}', 'StudyController@updateInDB');
-
-// editing participants
-Route::get('/find/participant/{req_type?}', 'ParticipantController@findToEdit');
-Route::get('/edit/participant/{id?}', 'ParticipantController@getInfo');
-Route::get('/participant/search/{req_type}', 'ParticipantController@search');
-// Route::get('/find/participant/{id?}', 'ParticipantController@findToEdit');
-Route::post('/participant/updateInDB/{id}', 'ParticipantController@updateInDB');
-
-// editing connections between participants and studies
-Route::get('/connect/participant/{id?}', 'ParticipantController@connectSingle');
-Route::post('/connection/saveConnection/{id?}', 'ParticipantController@saveConnection');
+// saving edits to database
+Route::post('/update/study/{id}', 'StudyController@updateInDB');
+Route::post('/update/participant/{id}', 'ParticipantController@updateInDB');
+Route::post('/update/connection/{id}', 'ParticipantController@updateInDB');
 
 Route::get('/db-debug', function () {
 

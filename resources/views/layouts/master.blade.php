@@ -14,22 +14,12 @@
     <div id="roundrect-container">
         @include('snippets.nav')
 
-        <div id="splash">
-            @yield('splash')
-        </div>
+        @yield('splash')
 
-        <div id="update-form">
-            @yield('update-form')
-        </div>
+        @yield('create_or_edit_form')
 
-        <div id="list">
-            @yield('list')
-        </div>
+        @yield('list')
 
-        <div id="report">
-            @yield('report')
-        </div>
-
-        @yield('content')
+        @yield('weclome_content')
     </div>
 </body>

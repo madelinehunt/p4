@@ -55,6 +55,21 @@ class ParticipantController extends Controller
         'age.min' => 'Participant must be of legal age to consent to the experiment.',
     ];
 
+    public function addForm()
+    {
+        return view('create_or_edit')->with([
+             'page_opts' => [
+                 'form_type' => 'participant',
+                 'action_type' => 'add',
+                 'header_text' => 'Add a participant to the database',
+                 'button_label' => 'Add participant',
+                 'title_text' => 'Add a participant to the database',
+             ],
+            'gender_choices' => $this->gender_choices,
+            'race_choices' => $this->race_choices,
+            'ethn_choices' => $this->ethn_choices,
+         ]);
+    }
 
     public function create(){
         return view('create.participant')->with([
@@ -84,9 +99,24 @@ class ParticipantController extends Controller
 
         $new_participant->save();
 
-        return redirect('/create/participant')->with([
-            'new_participant' => $new_participant,
+        return redirect('/add/participant/render')->with([
+            'success_message' => 'Participant '.$new_participant->id_code.'  added to the database!',
+            'success_header' => 'Create another participant?',
         ]);
+    }
+
+    public function searchPage($edit_type)
+    {
+        return view('searchbox')->with([
+            'edit_type' => $edit_type,
+        ]);
+    }
+
+    public function searchEngine(Request $request, $req_type)
+    {
+        $query_string = $req_type.'—'.'id_code'.'—'.'LIKE'.'—'.$request->keyword;
+
+        return redirect('/find/study/list/'.$query_string);
     }
 
     public function search(Request $request, $req_type)
@@ -100,95 +130,133 @@ class ParticipantController extends Controller
         ]);
     }
 
-    public function findToEdit($req_type)
+    public function editForm($id)
     {
-        return view('search.participant')->with([
-            'req_type' => $req_type,
-        ]);
+        $edit_type = explode('/', url()->current());
+        $edit_type = $edit_type[sizeof($edit_type)-2]; // derives eiher connection or participant
+
+        if ($edit_type == 'participant') {
+            $data = Participant::find($id);
+            return view('create_or_edit')->with([
+                 'page_opts' => [
+                     'form_type' => 'participant',
+                     'action_type' => 'edit',
+                     'header_text' => 'Edit '.$data->id_code,
+                      'button_label' => 'Submit',
+                      'title_text' => 'Edit '.$data->id_code,
+                 ],
+                'gender_choices' => $this->gender_choices,
+                'race_choices' => $this->race_choices,
+                'ethn_choices' => $this->ethn_choices,
+                'prefill_data' => $data,
+                'id' => $id,
+             ]);
+         } else {
+             $data = Participant::find($id);
+             $studies = Study::all();
+
+             // change to connection form
+             return view('create_or_edit')->with([
+                  'page_opts' => [
+                      'form_type' => 'connection',
+                      'action_type' => 'edit',
+                      'header_text' => 'Add a connection to '.$data->id_code,
+                       'button_label' => 'Submit',
+                       'title_text' => 'Add a connection to '.$data->id_code,
+                  ],
+                  'studies' => $studies,
+                  'participant' => $data,
+                  'p_id' => $id,
+                  'pol_options' => [
+                      'Democrat',
+                      'Republican',
+                      'Third-Party',
+                      'Independent',
+                      'Decline'
+                  ],
+              ]);
+         }
     }
 
-
-    public function getInfo($id = null)
+    public function editConnectionForm($id)
     {
-        $participant = Participant::find($id);
+        $data = Participant::find($id);
+        $studies = Study::all();
 
-        return view('edit.participant')->with([
-            'existing_participant' => $participant,
-            'participant_id' => $id,
-            'gender_choices' => $this->gender_choices,
-            'race_choices' => $this->race_choices,
-            'ethn_choices' => $this->ethn_choices,
-        ]);
+        // change to connection form
+        return view('create_or_edit')->with([
+             'page_opts' => [
+                 'form_type' => 'connection',
+                 'action_type' => 'edit',
+                 'header_text' => 'Add a connection to '.$data->id_code,
+                  'button_label' => 'Submit',
+                  'title_text' => 'Add a connection to '.$data->id_code,
+             ],
+             'studies' => $studies,
+             'participant' => $data,
+             'p_id' => $id,
+             'pol_options' => [
+                 'Democrat',
+                 'Republican',
+                 'Third-Party',
+                 'Independent',
+                 'Decline'
+             ],
+         ]);
     }
 
     public function updateInDB(Request $request, $id)
     {
-        $this->validate($request, $this->validation_rules, $this->validation_messages);
+        $edit_type = explode('/', url()->current());
+        $edit_type = $edit_type[sizeof($edit_type)-2]; // derives eiher connection or participant
 
-        $udpated_p = Participant::find($id);
+        if ($edit_type == 'participant') {
+            $this->validate($request, $this->validation_rules, $this->validation_messages);
 
-        $fields = [
-            'type',
-            'gender',
-            'race',
-            'ethnicity',
-            'age'
-        ];
+            $udpated_p = Participant::find($id);
 
-        foreach ($fields as $ix => $field) {
-            $udpated_p[$field] = $request[$field];
-        };
+            $fields = [
+                'type',
+                'gender',
+                'race',
+                'ethnicity',
+                'age'
+            ];
 
-        $udpated_p['id_code'] = strtoupper($request['id_code']);
+            foreach ($fields as $ix => $field) {
+                $udpated_p[$field] = $request[$field];
+            };
 
-        $udpated_p->save();
+            $udpated_p['id_code'] = strtoupper($request['id_code']);
 
-        return redirect('/find/participant/edit')->with([
-            'edited_name' => $udpated_p->id_code,
-        ]);
-    }
+            $udpated_p->save();
 
-    public function connectSingle($id)
-    {
-        $participant = Participant::find($id);
-
-        $studies = Study::all();
-
-        return view('edit.connection')->with([
-            'participant' => $participant,
-            'studies' => $studies,
-            'p_id' => $id,
-            'pol_options' => [
-                'Democrat',
-                'Republican',
-                'Third-Party',
-                'Independent',
-                'Decline'
-            ]
-        ]);
-    }
-
-    public function saveConnection(Request $request, $id)
-    {
-        $participant = Participant::find($id);
-        $study = Study::find($request->study_add);
-        if (!isset($request->political_affiliation)) {
-            $request->political_affiliation = null;
-        };
-        if (!isset($request->date_run)) {
-            $request->date_run = null;
+            return redirect('/find/participant/edit')->with([
+                'success_message' => 'Participant '.$udpated_p->id_code.' successfully updated!',
+                'success_header' => 'Edit another participant?',
+            ]);
         } else {
-            $request->date_run = Carbon::parse($request->date_run);
-        };
+            $participant = Participant::find($id);
+            $study = Study::find($request->study_add);
+            if (!isset($request->political_affiliation)) {
+                $request->political_affiliation = null;
+            };
+            if (!isset($request->date_run)) {
+                $request->date_run = null;
+            } else {
+                $request->date_run = Carbon::parse($request->date_run);
+            };
 
-        $participant->studies()->save($study, [
-            'political_affiliation' => $request->political_affiliation,
-            'date_run' => $request->date_run,
-        ]);
+            $participant->studies()->save($study, [
+                'political_affiliation' => $request->political_affiliation,
+                'date_run' => $request->date_run,
+            ]);
 
-        return redirect('/find/participant/connect')->with([
-            'edited_name' => $participant->id_code,
-        ]);
+            return redirect('/find/participant/connect')->with([
+                'success_message' => 'Participant '.$participant->id_code.' successfully connected!',
+                'success_header' => 'Connect another participant?',
+            ]);
+        }
     }
 
 }
